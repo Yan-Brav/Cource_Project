@@ -1,29 +1,33 @@
-Story: Find the coach name
+Story: Find the coaches
 Narrative:
 The customer may need to find certain coach
-By name on our team page
+on SkillsUp site
 
 Scenario: Search the coach by name
 Given the customer is on the main page SkillsUp site
 When the customer is on the our team page SkillsUp site
-Then he should see the name <name>
-
+Then customer should see <name>
 Examples:
 |name|
-|Артем Карпов|
-|Александр Галковский|
+|Михаил Чокан|
+|Ева Корнеплянская|
+|Илья|
 
-Scenario: Search the coach by name
-Given the customer is on the main page SkillsUp site
-When the customer is on the our team page SkillsUp site
-Then he should see the name Ольга Симчак
+Scenario: check that search by name "Alexander" find person who called "Alexander Tsariov" and has certificate #06109150
+Given the customer enter 'Alexander' in search field
+When the customer press button search
+Then he should see
+|title|desciption|
+|06109150|Alexander Tsariov|
 
-Scenario: Match coachName and course on coach page view
-When the customer is on the our team page SkillsUp site
-Then coach view contains
-|name|course|
-|Михаил Чокан|руководитель учебного центра|
-|Ева Корнеплянская|контент-менеджер|
-|Илья|координатор учебного центра|
+Scenario: check that coach who called Alexander Galkovskiy really teach Diving into Java and work as Senior Java Developer
+Given the customer enter 'Alexander Galkovskiy' in search field
+When the customer press button search
+Then he should see
+|position|course|
+|Java Tech Leader|Diving into Java|
+
+
+
 
 
