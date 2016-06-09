@@ -2,7 +2,9 @@ package serenityTest.steps.serenity;
 
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
+import serenityTest.pages.SearchPage;
 import serenityTest.pages.SkillsupPage;
+import serenityTest.pages.TrainingSkillsUpPage;
 
 import java.util.List;
 
@@ -12,6 +14,8 @@ import static org.hamcrest.Matchers.hasItem;
 
 public class CustomerSteps extends ScenarioSteps {
     SkillsupPage pageSkillsup;
+    TrainingSkillsUpPage pageTraining;
+    SearchPage pageSearch;
 
     @Step
     public void customerIsOnTheMainPageSkillsup(){
@@ -26,20 +30,36 @@ public class CustomerSteps extends ScenarioSteps {
         assertThat(pageSkillsup.getListCoachNames(), hasItem(containsString(name)));
     }
     @Step
+    public void shouldSeeCoachPosition(String position){
+        assertThat(pageSkillsup.getListCoachPosition(), hasItem(containsString(position)));
+    }
+    @Step
     public void enterNameIntoSearchField(String name){
-        pageSkillsup.enterNameInSearchField(name);
+        pageSearch.enterNameInSearchField(name);
     }
     @Step
     public void pressCustomerOnSearchButton(){
-        pageSkillsup.pressSearchButton();
+        pageSearch.pressSearchButton();
     }
     @Step
     public List<String> getListTitleFromSearchResultPage(){
-        return pageSkillsup.createListTitleFromSearchResultPage();
+        return pageSearch.createListTitleFromSearchResultPage();
     }
     @Step
     public List<String> getListDescriptionFromSearchResultPage(){
-        return pageSkillsup.createListDescriptionFromSearchResultPage();
+        return pageSearch.createListDescriptionFromSearchResultPage();
+    }
+    @Step
+    public void customerJumpOnTrainingPage(){
+        pageTraining.jumpToTrainingPage();
+    }
+    @Step
+    public String checkOutPrice(){
+        return pageTraining.getPrice();
+    }
+    @Step
+    public String checkOutGroupSize(){
+        return pageTraining.getGroupSize();
     }
 
 }

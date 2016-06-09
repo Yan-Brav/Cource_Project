@@ -3,29 +3,24 @@ Narrative:
 The customer may need to find certain coach
 on SkillsUp site
 
-Scenario: Search the coach by name
+Scenario: Find the coach by name and check out their positions
 Given the customer is on the main page SkillsUp site
 When the customer is on the our team page SkillsUp site
 Then customer should see <name>
 Examples:
-|name|
-|Михаил Чокан|
-|Ева Корнеплянская|
-|Илья|
+|name|position|
+|Михаил Чокан|руководитель учебного центра|
+|Ева Корнеплянская|контент-менеджер, тестировщик|
+|Илья|координатор учебного центра|
 
-Scenario: check that search by name "Alexander" find person who called "Alexander Tsariov" and has certificate #06109150
+Scenario: check out that search work correctly
 Given the customer enter 'Alexander' in search field
 When the customer press button search
 Then he should see
-|title|desciption|
+|title|description|
 |06109150|Alexander Tsariov|
+|Alexander Galkovskiy|Java Tech Leader|
 
-Scenario: check that coach who called Alexander Galkovskiy really teach Diving into Java and work as Senior Java Developer
-Given the customer enter 'Alexander Galkovskiy' in search field
-When the customer press button search
-Then he should see
-|position|course|
-|Java Tech Leader|Diving into Java|
 
 
 

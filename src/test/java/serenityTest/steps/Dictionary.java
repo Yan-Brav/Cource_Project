@@ -14,6 +14,9 @@ import static org.hamcrest.Matchers.hasItem;
 public class Dictionary {
     @Steps
     CustomerSteps customerSteps;
+    private String price;
+    private String groupSize;
+
     @Given("the customer is on the main page SkillsUp site")
     public void givenTheCustomerIsOnTheMainPageSkillsup(){
         customerSteps.customerIsOnTheMainPageSkillsup();
@@ -23,21 +26,14 @@ public class Dictionary {
         customerSteps.customerJumpOnOurTeamPage();
     }
     @Then("customer should see <name>")
-    public void thenShouldSeeTheCertainCoachName(@Named("name")String name){
+    public void thenShouldSeeTheCertainCoachName(@Named("name")String name, @Named ("position")String position){
         customerSteps.shouldSeeCoachName(name);
+        customerSteps.shouldSeeCoachPosition(position);
     }
-    /*@Then("coach view contains $coachesTable")
-    public void findAllCoaches(ExamplesTable coahesTable){
-        for (Map<String,String> row : coahesTable.getRows()) {
-            String name = row.get("name");
-            String course = row.get("course");
-            System.out.println(name + " " + course);
-        }
-    }*/
-    @Given("the customer enter $coach in search field")
-    @Alias("the customer enter 'Alexander Galkovskiy' in search field")
-    public void enterNameForSearch(String coach){
-        customerSteps.enterNameIntoSearchField(coach);
+
+    @Given("the customer enter $name in search field")
+    public void enterNameForSearch(String name){
+        customerSteps.enterNameIntoSearchField(name);
     }
     @When("the customer press button search")
     public void pressSearchButton(){
@@ -47,32 +43,18 @@ public class Dictionary {
     public void checkSearchResult(ExamplesTable coachTable){
             for (Map<String, String> row : coachTable.getRows()){
                 String title = row.get("title");
-                String desciption = row.get("desciption");
-                //System.out.println("The coach " + name + " has certificate # " + certificate);
+                String description = row.get("description");
                 assertThat(customerSteps.getListTitleFromSearchResultPage(), hasItem(containsString(title)));
-                assertThat(customerSteps.getListDescriptionFromSearchResultPage(), hasItem(containsString(desciption)));
-                /*boolean checkOutTitle = false;
-                for (String title : customerSteps.getListTitleFromSearchResultPage()){
-                     checkOutTitle = title.equals(certificate);
-                }
-                assertTrue(checkOutTitle);
-                boolean checkOutDescription = false;
-                for (String description : customerSteps.getListDescriptionFromSearchResultPage()){
-                    checkOutDescription = description.equals(name);
-                }
-                assertTrue(checkOutDescription);*/
+                assertThat(customerSteps.getListDescriptionFromSearchResultPage(), hasItem(containsString(description)));
         }
     }
-    @Then("he should see $alTable")
-    public void checkSearchResultByArtemLoginov(ExamplesTable alTable){
-            for (Map<String, String> row : alTable.getRows()){
-                String position = row.get("position");
-                String course = row.get("course");
-                System.out.println("Artem Loginov teach " + course + " and work as " + position);
-                assertThat(customerSteps.getListDescriptionFromSearchResultPage(), hasItem(containsString(position)));
-                assertThat(customerSteps.getListDescriptionFromSearchResultPage(), hasItem(containsString(course)));
-        }
+    @When("the customer go to the concrete training page")
+    public void goToTheTrainingPage(){
+        customerSteps.customerJumpOnTrainingPage();
     }
-
-
+    @Then("he may see <price> and <groupSize>")
+    public void checkOutTrainingByPriceAndGroupSize(@Named("price") String price, @Named("groupSize") String groupSize){
+        assertThat("Price isn't fit", customerSteps.checkOutPrice().contains(price));
+        assertThat("Size of group isn't fit", customerSteps.checkOutGroupSize().contains(groupSize));
+    }
 }
