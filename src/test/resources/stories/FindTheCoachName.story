@@ -21,7 +21,10 @@ Then he should see
 |06109150|Alexander Tsariov|
 |Alexander Galkovskiy|Java Tech Leader|
 
-
+Scenario: check out that search work incorrectly with cyrillic
+Given the customer enter 'Галковский' in search field
+When the customer press button search
+Then customer should see 'Не найдено совпадений по'
 
 
 

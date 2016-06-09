@@ -15,6 +15,7 @@ public class SearchPage extends PageObject {
     private By searchButton = By.id("u1552-2");
     private By searchResultTitle = By.className("xsltsearch_result_title");
     private By searchResultDescription = By.className("xsltsearch_result_description");
+    private By negativeSearchResult = By.id("xsltsearch_summary");
 
     public void enterNameInSearchField(String name){
         find(searchField).type(name);
@@ -37,5 +38,8 @@ public class SearchPage extends PageObject {
             listDescription.add(element.getText());
         }
         return listDescription;
+    }
+    public String getNegativeSummary(){
+        return find(negativeSearchResult).getText();
     }
 }

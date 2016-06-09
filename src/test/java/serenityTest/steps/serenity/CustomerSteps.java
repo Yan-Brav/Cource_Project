@@ -50,6 +50,10 @@ public class CustomerSteps extends ScenarioSteps {
         return pageSearch.createListDescriptionFromSearchResultPage();
     }
     @Step
+    public boolean checkOutNegativeSearchResult(String expression){
+        return pageSearch.getNegativeSummary().contains(expression);
+    }
+    @Step
     public void customerJumpOnTrainingPage(){
         pageTraining.jumpToTrainingPage();
     }

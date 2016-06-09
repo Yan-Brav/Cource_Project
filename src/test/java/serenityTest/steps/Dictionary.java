@@ -48,6 +48,10 @@ public class Dictionary {
                 assertThat(customerSteps.getListDescriptionFromSearchResultPage(), hasItem(containsString(description)));
         }
     }
+    @Then("he should see $expression")
+    public void checkOutNegativeSearchResult(String expression){
+        assertThat("The search result isn't empty", customerSteps.checkOutNegativeSearchResult(expression));
+    }
     @When("the customer go to the concrete training page")
     public void goToTheTrainingPage(){
         customerSteps.customerJumpOnTrainingPage();
