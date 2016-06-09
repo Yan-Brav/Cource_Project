@@ -51,7 +51,7 @@ public class CustomerSteps extends ScenarioSteps {
     }
     @Step
     public boolean checkOutNegativeSearchResult(String expression){
-        return pageSearch.getNegativeSummary().contains(expression);
+        return pageSearch.getNegativeSummary().equals(expression);
     }
     @Step
     public void customerJumpOnTrainingPage(){

@@ -9,4 +9,4 @@ When the customer go to the concrete training page
 Then he may see <price> and <groupSize>
 Examples:
 |price|groupSize|
-|4500 грн|12-16 человек|
+|Цена: 4500 грн|Размер группы: 12-16 человек|

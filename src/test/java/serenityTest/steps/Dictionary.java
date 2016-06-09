@@ -1,7 +1,10 @@
 package serenityTest.steps;
 
 import net.thucydides.core.annotations.Steps;
-import org.jbehave.core.annotations.*;
+import org.jbehave.core.annotations.Given;
+import org.jbehave.core.annotations.Named;
+import org.jbehave.core.annotations.Then;
+import org.jbehave.core.annotations.When;
 import org.jbehave.core.model.ExamplesTable;
 import serenityTest.steps.serenity.CustomerSteps;
 
@@ -41,12 +44,13 @@ public class Dictionary {
     }
     @Then("he should see $coachTable")
     public void checkSearchResult(ExamplesTable coachTable){
-            for (Map<String, String> row : coachTable.getRows()){
-                String title = row.get("title");
-                String description = row.get("description");
-                assertThat(customerSteps.getListTitleFromSearchResultPage(), hasItem(containsString(title)));
-                assertThat(customerSteps.getListDescriptionFromSearchResultPage(), hasItem(containsString(description)));
+        for (Map<String, String> row : coachTable.getRows()){
+            String title = row.get("title");
+            String description = row.get("description");
+            assertThat(customerSteps.getListTitleFromSearchResultPage(), hasItem(containsString(title)));
+            assertThat(customerSteps.getListDescriptionFromSearchResultPage(), hasItem(containsString(description)));
         }
+
     }
     @Then("he should see $expression")
     public void checkOutNegativeSearchResult(String expression){
@@ -58,7 +62,7 @@ public class Dictionary {
     }
     @Then("he may see <price> and <groupSize>")
     public void checkOutTrainingByPriceAndGroupSize(@Named("price") String price, @Named("groupSize") String groupSize){
-        assertThat("Price isn't fit", customerSteps.checkOutPrice().contains(price));
-        assertThat("Size of group isn't fit", customerSteps.checkOutGroupSize().contains(groupSize));
+        assertThat("Price isn't fit", customerSteps.checkOutPrice().equals(price));
+        assertThat("Size of group isn't fit", customerSteps.checkOutGroupSize().equals(groupSize));
     }
 }
